@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="CSUCI Datathon – Southern California Consortium for Data Science">
+<meta name="dcterms.date" content="2025-04-26">
+
+<title>Practice Session: Coding, Stats, and R Basics – ci_datathon_25</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c75bcb89907db7808f0349b764a1a524.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ci_datathon_25</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./tutorial.html" aria-current="page"> 
+<span class="menu-text">Practice Session: Coding, Stats, and R Basics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<p><img src="./img/logo.png" class="img-fluid"></p>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#basics" id="toc-basics" class="nav-link active" data-scroll-target="#basics">1. Basics</a>
+  <ul class="collapse">
+  <li><a href="#r-is-a-calculator" id="toc-r-is-a-calculator" class="nav-link" data-scroll-target="#r-is-a-calculator">1.1 <code>R</code> is a calculator</a>
+  <ul class="collapse">
+  <li><a href="#method-1" id="toc-method-1" class="nav-link" data-scroll-target="#method-1">Method 1</a></li>
+  <li><a href="#method-2" id="toc-method-2" class="nav-link" data-scroll-target="#method-2">Method 2</a></li>
+  <li><a href="#method-3" id="toc-method-3" class="nav-link" data-scroll-target="#method-3">Method 3</a></li>
+  <li><a href="#using-comments" id="toc-using-comments" class="nav-link" data-scroll-target="#using-comments">Using Comments</a></li>
+  </ul></li>
+  <li><a href="#workflow-tips" id="toc-workflow-tips" class="nav-link" data-scroll-target="#workflow-tips">1.2 Workflow Tips</a>
+  <ul class="collapse">
+  <li><a href="#white-space" id="toc-white-space" class="nav-link" data-scroll-target="#white-space">White Space</a></li>
+  </ul></li>
+  <li><a href="#using-functions" id="toc-using-functions" class="nav-link" data-scroll-target="#using-functions">1.2 Using Functions</a>
+  <ul class="collapse">
+  <li><a href="#note-on-r-syntax" id="toc-note-on-r-syntax" class="nav-link" data-scroll-target="#note-on-r-syntax">Note on <code>R</code> Syntax</a></li>
+  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1">Challenge 1</a></li>
+  <li><a href="#syntax-warning" id="toc-syntax-warning" class="nav-link" data-scroll-target="#syntax-warning">Syntax Warning</a></li>
+  </ul></li>
+  <li><a href="#assigning-objects" id="toc-assigning-objects" class="nav-link" data-scroll-target="#assigning-objects">1.3 Assigning Objects</a>
+  <ul class="collapse">
+  <li><a href="#caution" id="toc-caution" class="nav-link" data-scroll-target="#caution">CAUTION:</a></li>
+  </ul></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">1.4 Vectors</a>
+  <ul class="collapse">
+  <li><a href="#vectors-of-words" id="toc-vectors-of-words" class="nav-link" data-scroll-target="#vectors-of-words">Vectors of Words</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-frames-and-statistics-basics" id="toc-data-frames-and-statistics-basics" class="nav-link" data-scroll-target="#data-frames-and-statistics-basics">2. Data Frames and Statistics Basics</a>
+  <ul class="collapse">
+  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries">Libraries</a></li>
+  <li><a href="#data-frame-functions-mpg" id="toc-data-frame-functions-mpg" class="nav-link" data-scroll-target="#data-frame-functions-mpg">2.1 Data Frame Functions (<code>mpg</code>)</a>
+  <ul class="collapse">
+  <li><a href="#challenge-2" id="toc-challenge-2" class="nav-link" data-scroll-target="#challenge-2">Challenge 2:</a></li>
+  </ul></li>
+  <li><a href="#data-frame-filtering-with-subset-mpg" id="toc-data-frame-filtering-with-subset-mpg" class="nav-link" data-scroll-target="#data-frame-filtering-with-subset-mpg">2.2 Data Frame Filtering with <code>subset</code> (<code>mpg</code>)</a></li>
+  <li><a href="#statistics-primer" id="toc-statistics-primer" class="nav-link" data-scroll-target="#statistics-primer">2.3 Statistics Primer</a>
+  <ul class="collapse">
+  <li><a href="#variable-types" id="toc-variable-types" class="nav-link" data-scroll-target="#variable-types">Variable Types</a></li>
+  <li><a href="#challenge-3" id="toc-challenge-3" class="nav-link" data-scroll-target="#challenge-3">Challenge 3:</a></li>
+  <li><a href="#technical-note-1" id="toc-technical-note-1" class="nav-link" data-scroll-target="#technical-note-1">TECHNICAL NOTE 1:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#plots-and-summary-statistics" id="toc-plots-and-summary-statistics" class="nav-link" data-scroll-target="#plots-and-summary-statistics">3. Plots and Summary Statistics</a>
+  <ul class="collapse">
+  <li><a href="#basic-plots" id="toc-basic-plots" class="nav-link" data-scroll-target="#basic-plots">3.1 Basic Plots</a>
+  <ul class="collapse">
+  <li><a href="#scatterplots" id="toc-scatterplots" class="nav-link" data-scroll-target="#scatterplots">Scatterplots</a></li>
+  <li><a href="#caution-1" id="toc-caution-1" class="nav-link" data-scroll-target="#caution-1">CAUTION:</a></li>
+  <li><a href="#challenge-4" id="toc-challenge-4" class="nav-link" data-scroll-target="#challenge-4">Challenge 4:</a></li>
+  </ul></li>
+  <li><a href="#five-number-summaries" id="toc-five-number-summaries" class="nav-link" data-scroll-target="#five-number-summaries">3.2 Five Number Summaries</a>
+  <ul class="collapse">
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  <li><a href="#boxplot-separated-by-categorical-variable" id="toc-boxplot-separated-by-categorical-variable" class="nav-link" data-scroll-target="#boxplot-separated-by-categorical-variable">Boxplot separated by categorical variable</a></li>
+  </ul></li>
+  <li><a href="#summarizing-an-entire-dataset" id="toc-summarizing-an-entire-dataset" class="nav-link" data-scroll-target="#summarizing-an-entire-dataset">3.3 Summarizing an entire dataset</a>
+  <ul class="collapse">
+  <li><a href="#other-summary-statistics" id="toc-other-summary-statistics" class="nav-link" data-scroll-target="#other-summary-statistics">Other Summary Statistics</a></li>
+  </ul></li>
+  <li><a href="#other-plotting-tools" id="toc-other-plotting-tools" class="nav-link" data-scroll-target="#other-plotting-tools">3.4 Other Plotting Tools</a>
+  <ul class="collapse">
+  <li><a href="#histograms" id="toc-histograms" class="nav-link" data-scroll-target="#histograms">Histograms</a></li>
+  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting">Faceting</a></li>
+  <li><a href="#dot-plots" id="toc-dot-plots" class="nav-link" data-scroll-target="#dot-plots">Dot Plots</a></li>
+  <li><a href="#challenge-5" id="toc-challenge-5" class="nav-link" data-scroll-target="#challenge-5">Challenge 5</a></li>
+  <li><a href="#some-additional-examples" id="toc-some-additional-examples" class="nav-link" data-scroll-target="#some-additional-examples">Some additional examples</a></li>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">3.5 Correlation</a>
+  <ul class="collapse">
+  <li><a href="#challenge-6" id="toc-challenge-6" class="nav-link" data-scroll-target="#challenge-6">Challenge 6</a></li>
+  <li><a href="#warning-correlation-vs-causation" id="toc-warning-correlation-vs-causation" class="nav-link" data-scroll-target="#warning-correlation-vs-causation">WARNING: Correlation vs Causation</a></li>
+  <li><a href="#challenge-7" id="toc-challenge-7" class="nav-link" data-scroll-target="#challenge-7">Challenge 7</a></li>
+  <li><a href="#scatterplots-with-lines-of-best-fit" id="toc-scatterplots-with-lines-of-best-fit" class="nav-link" data-scroll-target="#scatterplots-with-lines-of-best-fit">Scatterplots with lines of best fit</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tutorial.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Practice Session: Coding, Stats, and R Basics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>CSUCI Datathon – Southern California Consortium for Data Science </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 26, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="basics" class="level1">
+<h1>1. Basics</h1>
+<p>In this section, you will learn the basics of <code>R</code>.</p>
+<p>To follow along, you should type the code that appears in each box to ensure you are getting the intended result.</p>
+<ol type="1">
+<li>When you encounter a “<strong>Challenge</strong>”, this is a task you should solve with your group using critical thinking.<br>
+</li>
+<li>In this first part, whenever you see a box of code, you should also type out that code and run it to verify the output. We all need to learn the basics.</li>
+<li>When we get to part 2 (<em>Data Frames</em>), it is okay to focus more on the challenges and read code and the output. However, you should still type out any code that feels “brand new.” Physically typing out the code helps more than you might think.</li>
+</ol>
+<p>Don’t be afraid to ask for help at any point during the datathon! Raise your hand and a volunteer will come help right away.</p>
+<section id="r-is-a-calculator" class="level2">
+<h2 class="anchored" data-anchor-id="r-is-a-calculator">1.1 <code>R</code> is a calculator</h2>
+<p>What is <span class="math inline">\(2+2\)</span>? <code>R</code> can do this for us in three different ways.</p>
+<section id="method-1" class="level3">
+<h3 class="anchored" data-anchor-id="method-1">Method 1</h3>
+<p>Input <code>2+2</code> into the <strong>console</strong> and press <code>ENTER</code> to obtain <code>4</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="method-2" class="level3">
+<h3 class="anchored" data-anchor-id="method-2">Method 2</h3>
+<p>Try doing it from the script by following these steps:</p>
+<ol type="1">
+<li>Input <code>2+2</code> into the <strong>script</strong> file.</li>
+<li>Pressing <code>CTRL+ENTER</code>. <em>(<code>CMD+ENTER</code> on a mac.)</em></li>
+</ol>
+<p>Now, look at the console and you will notice that the code “gets run” in the console.</p>
+</section>
+<section id="method-3" class="level3">
+<h3 class="anchored" data-anchor-id="method-3">Method 3</h3>
+<ul>
+<li>Go back to the line for <code>2+2</code> in the script file, and click the <code>RUN</code> button.</li>
+</ul>
+</section>
+<section id="using-comments" class="level3">
+<h3 class="anchored" data-anchor-id="using-comments">Using Comments</h3>
+<p>Lines that start with a # are called <em>comments</em> and is not run. They are useful for making notes to yourself or to explain complex code.</p>
+<p>Type each of these two lines into the script file and run them one-by-one.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply 2 by 3 and then add 7</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+<p>You do not need to type out the comments in this next example, but you should read them and run the code.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average of four numbers.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we sum the numbers using parentheses, then divide by the count.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">7</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.5</code></pre>
+</div>
+</div>
+<p>In what follows, you do not necessarily need to type out all of the comments. However, it is considered “good coding practice” to add comments to your code. <em>(Can you think of a couple of reasons as to why?)</em></p>
+</section>
+</section>
+<section id="workflow-tips" class="level2">
+<h2 class="anchored" data-anchor-id="workflow-tips">1.2 Workflow Tips</h2>
+<ul>
+<li>Think of the <code>script</code> as a whiteboard. You can adjust it as you need to.<br>
+</li>
+<li>The <code>console</code> can be used to run quick commands directly</li>
+</ul>
+<p>What if the <code>7</code> is instead a <code>9</code>?</p>
+<p>Instead of typing out this code, go back and adjust <code>(2 + 7 + 3 + 2) / 4)</code> in the script. Then use <code>CTRL + ENTER</code> to run it.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">9</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>You can also <em>recycle</em> commands with the console:</p>
+<ul>
+<li>Click anywhere in the console, and press the <code>up arrow</code> on the keyboard. Keep pressing it and cycle through to see the commands you have ran.</li>
+<li>Click on the <code>"History"</code> tab in the upper right as another way to see previous commands. (<em>Make sure to click back to <code>"Environment"</code>…we will be using it soon</em>)</li>
+<li>You can highlight multiple lines of code and run them at once. Right now, highlight all of your code and run it. Your resulting console should give output like this:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply 2 by 3 and then add 7</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average of four numbers.</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we sum the numbers using parentheses, then divide by the count.</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">9</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<section id="white-space" class="level3">
+<h3 class="anchored" data-anchor-id="white-space">White Space</h3>
+<ul>
+<li>White space (empty lines) do not affect code. It is encouraged to make code more readable.<br>
+</li>
+<li>Instead a script with no spaces, something like this is preferable:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply 2 by 3 and then add 7</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">7</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average of four numbers.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we sum the numbers using parentheses, then divide by the count.</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">9</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="using-functions" class="level2">
+<h2 class="anchored" data-anchor-id="using-functions">1.2 Using Functions</h2>
+<p><code>R</code> includes functions for other types of math</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using a function: rounding numbers</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>An <em>argument</em> is an <em>input</em> to a function. Functions can take in many arguments:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using a function with more arguments</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>, <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.1</code></pre>
+</div>
+</div>
+<section id="note-on-r-syntax" class="level3">
+<h3 class="anchored" data-anchor-id="note-on-r-syntax">Note on <code>R</code> Syntax</h3>
+<p>Here are three ways to do the same thing. Can you see why this happens?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>, <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 2</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 3</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.1</code></pre>
+</div>
+</div>
+<p><code>R</code> reads from left to right, line by line. If it does not see the end of a statement, then it will keep going onto the next line.</p>
+</section>
+<section id="challenge-1" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-1">Challenge 1</h3>
+<p>What do you think this code will produce? Predict the answer yourself before running it.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">30</span> <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="syntax-warning" class="level3">
+<h3 class="anchored" data-anchor-id="syntax-warning">Syntax Warning</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct syntax</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Incorrect syntax: This will cause an error because the statement is not complete without ")"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Incorrect syntax: This will cause an error because R is case sensitive.</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Round</span>(<span class="fl">3.14</span>, </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="assigning-objects" class="level2">
+<h2 class="anchored" data-anchor-id="assigning-objects">1.3 Assigning Objects</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning value to an object</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">55</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, look in the upper right and you will see <code>weight_kg</code> in the <code>environment</code>. This means we can use it in various ways:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recall object</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>weight_kg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multiply an object (convert kg to lb)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 121</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign converted weight in lbs</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>weight_lb <span class="ot">&lt;-</span> <span class="fl">2.2</span> <span class="sc">*</span> weight_kg</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># reassign new value to an object</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running the last code, notice that <code>weight_kg</code> changed in the environment panel.</p>
+<section id="caution" class="level3">
+<h3 class="anchored" data-anchor-id="caution">CAUTION:</h3>
+<p>Reminder: <code>R</code> is case sensitive. So it will treat <code>weight_kg</code>, <code>Weight_kg</code>, and <code>WEIGHT_kg</code> differently. (<em>Try running the command <code>Weight_kg</code>. What error does it produce?</em>)</p>
+</section>
+</section>
+<section id="vectors" class="level2">
+<h2 class="anchored" data-anchor-id="vectors">1.4 Vectors</h2>
+<p>In <code>R</code>, a <strong>vector</strong> can be thought of as a list <em>(usually of numbers)</em>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign vector</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">24</span>) </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># recall vector</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>ages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16 18 20 22 24</code></pre>
+</div>
+</div>
+<p>All sorts of functions can be applied to vectors:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many things are in object?</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average the ages to obtain the mean: (16 + 18 + 20 + 22 + 24) / 5</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)  <span class="co"># this is faster than typing out (16 + 18 + 20 + 22 + 24) / 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># smallest and largest ages</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16 24</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what are the ages if everyone becomes 5 years older?</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>ages <span class="sc">+</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21 23 25 27 29</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what are the ages if everyone is two times as old as they are now?</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>ages <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32 36 40 44 48</code></pre>
+</div>
+</div>
+<section id="vectors-of-words" class="level3">
+<h3 class="anchored" data-anchor-id="vectors-of-words">Vectors of Words</h3>
+<p>Words need to be put in quotation marks.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of foods</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>foods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pizza"</span>, <span class="st">"spaghetti"</span>, <span class="st">"steak"</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>foods</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pizza"     "spaghetti" "steak"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It doesn't make sense to take an average of the foods.</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NA means "Not Available"</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(foods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="data-frames-and-statistics-basics" class="level1">
+<h1>2. Data Frames and Statistics Basics</h1>
+<p>A <strong>data frame</strong> is like a spreadsheet. They can</p>
+<ol type="1">
+<li>be created from scratch like we did with <code>ages</code> (using the <code>data.frame(...)</code> command)</li>
+<li>imported from a <em>package</em> (or, exist in <em>base <code>R</code></em>)</li>
+<li>be imported <em>(excel spreadsheets can be imported!)</em></li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/r-data-frame.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="libraries" class="level3">
+<h3 class="anchored" data-anchor-id="libraries">Libraries</h3>
+<p><code>libraries</code> are separate functions functions someone else wrote that are not built into R. They need to be installed ahead of time, but we have done that for you.</p>
+<p>Now, load the package <code>ggplot2</code>. This code needs to be run <strong>once</strong> per <code>R</code> session.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package.  Gives access to plotting tools and loads "mpg".  </span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert mpg into environment</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mpg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-frame-functions-mpg" class="level2">
+<h2 class="anchored" data-anchor-id="data-frame-functions-mpg">2.1 Data Frame Functions (<code>mpg</code>)</h2>
+<p>In <code>mpg</code>,</p>
+<ul>
+<li>each row corresponds to an <em>observation</em> (in this case, a car)</li>
+<li>each column corresponds to a <em>variable</em> car characteristic</li>
+<li>each cell has a value</li>
+</ul>
+<p>Here are some things you can use to understand a data frame better:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the variable  names</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "manufacturer" "model"        "displ"        "year"         "cyl"         
+ [6] "trans"        "drv"          "cty"          "hwy"          "fl"          
+[11] "class"       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the number of observations and variables.  dim means dimension</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 234  11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the first 10 observations of the dataframe</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access a certain variable with a "$"</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>hwy  <span class="co"># highway mpg</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 29 29 31 30 26 26 27 26 25 28 27 25 25 25 25 24 25 23 20 15 20 17 17 26 23
+ [26] 26 25 24 19 14 15 17 27 30 26 29 26 24 24 22 22 24 24 17 22 21 23 23 19 18
+ [51] 17 17 19 19 12 17 15 17 17 12 17 16 18 15 16 12 17 17 16 12 15 16 17 15 17
+ [76] 17 18 17 19 17 19 19 17 17 17 16 16 17 15 17 26 25 26 24 21 22 23 22 20 33
+[101] 32 32 29 32 34 36 36 29 26 27 30 31 26 26 28 26 29 28 27 24 24 24 22 19 20
+[126] 17 12 19 18 14 15 18 18 15 17 16 18 17 19 19 17 29 27 31 32 27 26 26 25 25
+[151] 17 17 20 18 26 26 27 28 25 25 24 27 25 26 23 26 26 26 26 25 27 25 27 20 20
+[176] 19 17 20 17 29 27 31 31 26 26 28 27 29 31 31 26 26 27 30 33 35 37 35 15 18
+[201] 20 20 22 17 19 18 20 29 26 29 29 24 44 29 26 29 29 29 29 23 24 44 41 29 26
+[226] 28 29 29 29 28 29 26 26 26</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average highway mpg of cars in the dataset</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mpg<span class="sc">$</span>hwy)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.44017</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view the data frame like an excel spreadsheet</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also use the environment instead of typing <code>View(...)</code>. Do this now by clicking on <code>mpg</code> in the environment tab.</p>
+<section id="challenge-2" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-2">Challenge 2:</h3>
+<p>Find the average city miles per gallon for a car in the dataset and compare it to the average highway miles per gallon. Does the result surprise you?</p>
+</section>
+</section>
+<section id="data-frame-filtering-with-subset-mpg" class="level2">
+<h2 class="anchored" data-anchor-id="data-frame-filtering-with-subset-mpg">2.2 Data Frame Filtering with <code>subset</code> (<code>mpg</code>)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering cars with highway mileage greater than 30</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mpg, hwy <span class="sc">&gt;</span> <span class="dv">30</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering cars that are rear wheel drive</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mpg, drv <span class="sc">==</span> <span class="st">"r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average hwy mpg of minivans</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>minivans <span class="ot">&lt;-</span> <span class="fu">subset</span>(mpg, class <span class="sc">==</span> <span class="st">"minivan"</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(minivans<span class="sc">$</span>hwy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.36364</code></pre>
+</div>
+</div>
+</section>
+<section id="statistics-primer" class="level2">
+<h2 class="anchored" data-anchor-id="statistics-primer">2.3 Statistics Primer</h2>
+<section id="variable-types" class="level3">
+<h3 class="anchored" data-anchor-id="variable-types">Variable Types</h3>
+<p>There are two main types of variables</p>
+<ul>
+<li><strong>Numerical</strong> <em>(or quantitative)</em>: Typically numbers; makes sense to add and average them.</li>
+<li><strong>Categorical</strong> (<em>or factor, or qualitative</em>): Typically things that have names; does not make sense to add or average them.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># engine size (displacement) is a numeric variable.</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mpg<span class="sc">$</span>displ)  <span class="co"># average of engine sizes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.471795</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mpg<span class="sc">$</span>displ)  <span class="co"># sum of engine sizes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 812.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># class, or "type" of car is a categorical variable</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mpg<span class="sc">$</span>class)  <span class="co"># this will return an error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mpg<span class="sc">$</span>class)  <span class="co"># gives the unique elements of car type ("levels" or "categories")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "compact"    "midsize"    "suv"        "2seater"    "minivan"   
+[6] "pickup"     "subcompact"</code></pre>
+</div>
+</div>
+</section>
+<section id="challenge-3" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-3">Challenge 3:</h3>
+<ol type="1">
+<li>Give another numerical variable in <code>mpg</code>, and report its average.</li>
+<li>Give another categorical variable in <code>mpg</code>, and report its possible categories.</li>
+</ol>
+</section>
+<section id="technical-note-1" class="level3">
+<h3 class="anchored" data-anchor-id="technical-note-1">TECHNICAL NOTE 1:</h3>
+<p><em>(Feel free to run the code in the helper script and skip this part)</em></p>
+<p>When doing statistics, categorical variables should be stored as <em>factor</em> variables, which tells <code>R</code> that the words are more than just words and will be used for statistics. The <code>Levels</code> are the possible categories.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># foods, as a character</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>foods</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pizza"     "spaghetti" "steak"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># foods, as a factor</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(foods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] pizza     spaghetti steak    
+Levels: pizza spaghetti steak</code></pre>
+</div>
+</div>
+<p>Categorical variables are usually already factor variables in <code>R</code>, but depending on how the data is imported, they may need to be converted. We need to do this with <code>mpg</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 1: tedious but straightforward</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat this for each categorical variable</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>manufacturer <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mpg<span class="sc">$</span>manufacturer)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 2: does it automatically, but the code is very complicated.</span></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co"># You can find this code in the helper script so you do not have to type it by hand.</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>mpg[<span class="fu">sapply</span>(mpg, is.character)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(mpg[<span class="fu">sapply</span>(mpg, is.character)], </span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>                                                           as.factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="plots-and-summary-statistics" class="level1">
+<h1>3. Plots and Summary Statistics</h1>
+<section id="basic-plots" class="level2">
+<h2 class="anchored" data-anchor-id="basic-plots">3.1 Basic Plots</h2>
+<section id="scatterplots" class="level3">
+<h3 class="anchored" data-anchor-id="scatterplots">Scatterplots</h3>
+<p>Scatterplots illustrate a relationship between two numeric variables.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most common syntax</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative syntax, can be too long (examples later)</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>cty, <span class="at">y =</span> hwy))</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax to illustrate each part</span></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>             <span class="co"># We want to plot "mpg"</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(             <span class="co"># Make a "point" plot (scatterplot)</span></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>cty, <span class="at">y =</span> hwy)   <span class="co"># Aesthetically, cty is on x-axis, hwy is on y-axis</span></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>aes(...)</code> tells the plot what <strong>aesthetics</strong> you want it to have. Some examples of things to specify:</p>
+<ul>
+<li><code>x</code>: variable to put on <span class="math inline">\(x\)</span>-axis</li>
+<li><code>y</code>: variable to put on <span class="math inline">\(y\)</span>-axis</li>
+<li><code>col</code>: if you want to add color according to a certain variable</li>
+<li><code>size</code>: if you want to change the</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colored by car type</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy, <span class="at">col =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding jitter is useful when data might overlap.</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy, <span class="at">col =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-31-2.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also add labels</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy, <span class="at">col =</span> class)) <span class="sc">+</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"City MPG"</span>) <span class="sc">+</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Highway MPG"</span>) <span class="sc">+</span></span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Highway MPG vs City MPG Colored by Car Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-31-3.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="caution-1" class="level3">
+<h3 class="anchored" data-anchor-id="caution-1">CAUTION:</h3>
+<p>Use <code>geom_point</code> unless the data is overlapping (common when the numeric values are forced to be whole numbers). Only use <code>jitter</code> when needed <em>(otherwise the data is slightly misrepresented</em>).</p>
+</section>
+<section id="challenge-4" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-4">Challenge 4:</h3>
+<p>Answer a couple of questions based on the plot just created.</p>
+<ul>
+<li>What pattern do you notice between city and highway MPG? In particular, suppose that you know a car has a relatively high city MPG. What is likely about its highway MPG?</li>
+<li>What class of cars tend to have the lowest MPG (in general)?</li>
+<li>What class of cars tend to have the highest MPG (in general)?</li>
+</ul>
+</section>
+</section>
+<section id="five-number-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="five-number-summaries">3.2 Five Number Summaries</h2>
+<p>A five number summary (and mean) helps summarize numeric variables. It is best motivated by looking at the data a certain way. Let’s represent each mpg as a point on a plot.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg<span class="sc">$</span>hwy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  12.00   18.00   24.00   23.44   27.00   44.00 </code></pre>
+</div>
+</div>
+<ul>
+<li>The <strong>minimum</strong> (<code>Min.</code>) highway mpg is 12. This represents the lowest data point in the dataset.</li>
+<li>The <strong>maximum</strong> (<code>Max.</code>) highway mpg is 44. This is the highest value observed in the dataset.</li>
+<li>The <strong>mean</strong> (<code>Mean</code>) highway mpg is 23.44. This is indicated by the arrow on the plot and can be thought of as the <em>center of balance</em>.
+<ul>
+<li>If the red arrow was moved to the left, then the right side would tip over. If it was moved to the right, then the left side would tip over.</li>
+</ul></li>
+<li>The <strong>median</strong> (<code>Median</code>, 24), <strong>first quartile</strong> (<code>1st Qu.</code>, 18) <strong>third quartile</strong> (<code>3rd Qu.</code>, 27) divide the data into <strong>quarters</strong> (or, fourths).
+<ul>
+<li>The circles are the smallest.</li>
+<li>The triangles are the next smallest.</li>
+<li>The squares are the next.</li>
+<li>The plus’s are next <em>(so, they are the largest quarter of the data!)</em></li>
+</ul></li>
+</ul>
+<p>Another way to think about it:</p>
+<ul>
+<li>25% of the data is at or below <code>1st Qu.</code></li>
+<li>50% of the data is at or below <code>Median</code> <em>(so, half of the data is at or below the median, and the other half is above.)</em></li>
+<li>75% of the data is at or below <code>3rd Qu.</code></li>
+</ul>
+<p>(<em>Note: the five number summary is <code>Min</code>, <code>1st Qu.</code>, <code>Median</code>, <code>3rd Qu.</code>, and <code>Max</code>. The mean is not considered as part of the “five number summary”.</em>)</p>
+<section id="boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
+<p>The five number summary is also expressed as a boxplot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Single Boxplot</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> hwy)) <span class="sc">+</span>   <span class="co"># boxplot with y axis as highway mpg</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>()             <span class="co"># optional, but makes it look better</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Look at the <span class="math inline">\(y\)</span>-axis (<code>hwy</code>) and note that it matches the five number summary.</p>
+<p>The dots represent <strong>outliers</strong> and are extreme values.</p>
+</section>
+<section id="boxplot-separated-by-categorical-variable" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot-separated-by-categorical-variable">Boxplot separated by categorical variable</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate hwy by vehicle class</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> class)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-34-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add color (fill in the boxplot)</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> class, <span class="at">fill =</span> class)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-34-2.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summarizing-an-entire-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="summarizing-an-entire-dataset">3.3 Summarizing an entire dataset</h2>
+<p><code>summary(mpg)</code> gives some summary statistics for each column of the data frame <code>mpg</code>.</p>
+<ul>
+<li>Numeric variables: five number summary and mean</li>
+<li>Categorical variables: reports the <em>count</em> or <em>frequency</em> of occurrences of each type</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic summary of each column</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     manufacturer                 model         displ            year     
+ dodge     :37    caravan 2wd        : 11   Min.   :1.600   Min.   :1999  
+ toyota    :34    ram 1500 pickup 4wd: 10   1st Qu.:2.400   1st Qu.:1999  
+ volkswagen:27    civic              :  9   Median :3.300   Median :2004  
+ ford      :25    dakota pickup 4wd  :  9   Mean   :3.472   Mean   :2004  
+ chevrolet :19    jetta              :  9   3rd Qu.:4.600   3rd Qu.:2008  
+ audi      :18    mustang            :  9   Max.   :7.000   Max.   :2008  
+ (Other)   :74    (Other)            :177                                 
+      cyl               trans    drv          cty             hwy       
+ Min.   :4.000   auto(l4)  :83   4:103   Min.   : 9.00   Min.   :12.00  
+ 1st Qu.:4.000   manual(m5):58   f:106   1st Qu.:14.00   1st Qu.:18.00  
+ Median :6.000   auto(l5)  :39   r: 25   Median :17.00   Median :24.00  
+ Mean   :5.889   manual(m6):19           Mean   :16.86   Mean   :23.44  
+ 3rd Qu.:8.000   auto(s6)  :16           3rd Qu.:19.00   3rd Qu.:27.00  
+ Max.   :8.000   auto(l6)  : 6           Max.   :35.00   Max.   :44.00  
+                 (Other)   :13                                          
+ fl             class   
+ c:  1   2seater   : 5  
+ d:  5   compact   :47  
+ e:  8   midsize   :41  
+ p: 52   minivan   :11  
+ r:168   pickup    :33  
+         subcompact:35  
+         suv       :62  </code></pre>
+</div>
+</div>
+<p>For example, there are 62 SUV’s in the dataset and 11 minivans, and the average city mpg is 16.86.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for minivans.  </span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   Remember we defined "minivans" earlier?  Look in your environment!</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(minivans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> manufacturer          model               displ            year     
+ Length:11          Length:11          Min.   :2.400   Min.   :1999  
+ Class :character   Class :character   1st Qu.:3.300   1st Qu.:1999  
+ Mode  :character   Mode  :character   Median :3.300   Median :1999  
+                                       Mean   :3.391   Mean   :2003  
+                                       3rd Qu.:3.800   3rd Qu.:2008  
+                                       Max.   :4.000   Max.   :2008  
+      cyl           trans               drv                 cty       
+ Min.   :4.000   Length:11          Length:11          Min.   :11.00  
+ 1st Qu.:6.000   Class :character   Class :character   1st Qu.:15.50  
+ Median :6.000   Mode  :character   Mode  :character   Median :16.00  
+ Mean   :5.818                                         Mean   :15.82  
+ 3rd Qu.:6.000                                         3rd Qu.:17.00  
+ Max.   :6.000                                         Max.   :18.00  
+      hwy             fl               class          
+ Min.   :17.00   Length:11          Length:11         
+ 1st Qu.:22.00   Class :character   Class :character  
+ Median :23.00   Mode  :character   Mode  :character  
+ Mean   :22.36                                        
+ 3rd Qu.:24.00                                        
+ Max.   :24.00                                        </code></pre>
+</div>
+</div>
+<section id="other-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="other-summary-statistics">Other Summary Statistics</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of counts separated by two categorical variables</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mpg<span class="sc">$</span>class, mpg<span class="sc">$</span>drv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+              4  f  r
+  2seater     0  0  5
+  compact    12 35  0
+  midsize     3 38  0
+  minivan     0 11  0
+  pickup     33  0  0
+  subcompact  4 22  9
+  suv        51  0 11</code></pre>
+</div>
+</div>
+<p>For example, there are 12 compacts with 4 wheel drive, and all minivans (11) have front wheel drive.</p>
+</section>
+</section>
+<section id="other-plotting-tools" class="level2">
+<h2 class="anchored" data-anchor-id="other-plotting-tools">3.4 Other Plotting Tools</h2>
+<section id="histograms" class="level3">
+<h3 class="anchored" data-anchor-id="histograms">Histograms</h3>
+<p><strong>Histograms</strong> are useful for numeric variables that can take <strong>decimal values</strong> <em>(decimal valued variables are called “continuous”. Whole number valued are called “discrete”)</em>.</p>
+<p>They “bin” the data into ranges.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using 7 bins</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ), <span class="at">bins =</span> <span class="dv">7</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span>  </span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Engine Size (Litres)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-38-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So there are roughly…</p>
+<ul>
+<li>49 engines with a size between (approximately) 1.4 to 2.3, (first “bin” or rectangle)</li>
+<li>65 engines with a size between (approximately) 2.3 to 3.2, (first “bin” or rectangle)</li>
+<li>49 engines with a size between (approximately) 3.2 to 4.1, (first “bin” or rectangle)</li>
+</ul>
+<p>and so forth.</p>
+<p>Histograms are helpful to describe the <strong>general shape</strong> (a <strong>visual summary</strong>) of a numeric variable. So we can see that the number of engines with large sizes are very small, and that number decreases very quickly. The majority of engines are around the 1 to 4 litre range.</p>
+<p>You can change the number of bins that get used, but it will change the way the results are displayed.</p>
+<ul>
+<li>Use too few bins, and the data gets “over-summarized”.</li>
+<li>Use too many bins, and the results are too fine. It is hard to come up with general conclusions of the data.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 bins, over-summarized</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ), <span class="at">bins =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span>  </span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Engine Size (Litres)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-39-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 30 bins, does not give good summary</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ), <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span>  </span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Engine Size (Litres)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-39-2.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 9 bins, does a pretty good job</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ), <span class="at">bins =</span> <span class="dv">9</span>, <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span>  </span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Engine Size (Litres)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-39-3.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here we can see the data <strong>“tails off”</strong> to the right, and the majority is around 2 and 3 size engines.</p>
+</section>
+<section id="faceting" class="level3">
+<h3 class="anchored" data-anchor-id="faceting">Faceting</h3>
+<p><strong>Faceting</strong> is useful to display plots broken up by categorical variables.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No Facet</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-40-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Facet by type</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-40-2.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add color</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-40-3.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can also add color without faceting, but it can be hard to tell what is going on when there are many categories.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">col =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-41-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dot-plots" class="level3">
+<h3 class="anchored" data-anchor-id="dot-plots">Dot Plots</h3>
+<p>A <strong>dot plot</strong> is a simple way to display data using dots along a number line. Each dot represents one occurrence of a value in a data set. Dot plots are especially useful for small to moderate-sized data sets and give a clear visual of the distribution, frequency, and possible clusters or outliers in the data.</p>
+<section id="key-features" class="level4">
+<h4 class="anchored" data-anchor-id="key-features">Key Features:</h4>
+<ul>
+<li>Each dot represents a data point.</li>
+<li>Values are placed along a horizontal axis.</li>
+<li>Stacked dots indicate multiple occurrences of the same value.</li>
+<li>Good for comparing small groups or identifying patterns.</li>
+</ul>
+<p>Dot plots are often used in statistics and education for easy interpretation of numerical data.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="fu">aes</span>(hwy)) <span class="sc">+</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Simple Dot Plot of Highway MPG"</span>,</span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Highway MPG"</span>,</span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-42-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="challenge-5" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-5">Challenge 5</h3>
+<p>Use the faceted scatterplot to determine what classes of cars have the best highway mpg. What can we say about the engine sizes of those cars?</p>
+<p>Now, try to answer the same question with the last scatterplot made (with color but without faceting). (<em>It should be a harder question to answer…</em>)</p>
+</section>
+<section id="some-additional-examples" class="level3">
+<h3 class="anchored" data-anchor-id="some-additional-examples">Some additional examples</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">fill =</span> class), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">bins =</span> <span class="dv">14</span>) <span class="sc">+</span> </span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-43-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a good proof of concept, but produces some boxplots with too small</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   of sample sizes to get a good summary of.</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> cty, <span class="at">x =</span> drv, <span class="at">fill =</span> class))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-44-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="correlation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation">3.5 Correlation</h2>
+<p>The <strong>correlation</strong> is a summary statistic between two numeric variables is a number between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> that says how much one linearly affects the other (<em>meaning if you tried to draw a line to “fit” the data</em>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(mpg<span class="sc">$</span>hwy, mpg<span class="sc">$</span>cty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9559159</code></pre>
+</div>
+</div>
+<p>Some rules of thumb can be</p>
+<ul>
+<li>If correlation is greater than 0.7, the data is strongly correlated. If the <span class="math inline">\(x\)</span> variable increases, we expect the <span class="math inline">\(y\)</span> variable to increase as well.</li>
+<li>If correlation is between 0.3 and 0.5. If the <span class="math inline">\(x\)</span> variable increases, the <span class="math inline">\(y\)</span> variable tends to increase <em>(but less likely to do so than in the strong case)</em></li>
+<li>If the correlation is between 0 and 0.3, the data is hardly correlated. It means that as <span class="math inline">\(x\)</span> increases, it’s tough to expect <span class="math inline">\(y\)</span> to increase as well.</li>
+</ul>
+<p>For negative values, we switch one of “increase” to decrease. For example, if the correlation is -0.8, we would say “as <span class="math inline">\(x\)</span> increases, we expect <span class="math inline">\(y\)</span> to decrease.”</p>
+<section id="challenge-6" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-6">Challenge 6</h3>
+<ol type="1">
+<li>Go back and review the scatterplot of highway mpg and engine size (<code>displ</code>) (use the version with no color or faceting). What tends to happen to highway mpg for larger engine cars? Smaller?</li>
+<li>Now, compute their correlation. Is its value consistent with the scatterplot?</li>
+</ol>
+</section>
+<section id="warning-correlation-vs-causation" class="level3">
+<h3 class="anchored" data-anchor-id="warning-correlation-vs-causation">WARNING: Correlation vs Causation</h3>
+<p>Correlation is a value applied to a dataset that already exists. It does not necessarily mean that there is a <em>“causal”</em> relationship, which would happen if someone tried to intervene with the data. Here is an example:</p>
+<p><em>“We expect the daily temperature and number of people on the beach to be positively correlated. We also expect number of shark attacks and daily temperature and to be positively correlated, since higher temperatures mean more people on the beach, so naturally there are more shark attacks. However, the relationship is not . If we put more sharks in the water, the number of shark attacks will increase, but it will not increase the temperature.”</em></p>
+</section>
+<section id="challenge-7" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-7">Challenge 7</h3>
+<p>Think of two scenarios:</p>
+<ol type="1">
+<li>Two variables that are correlated with one another, and there <strong>is</strong> a causal relationship.</li>
+<li>Two variables that are correlated with one another, and there <strong>is not</strong> a causal relationship. <em>(This happens in the shark attack example. Think of a new example.)</em></li>
+</ol>
+</section>
+<section id="scatterplots-with-lines-of-best-fit" class="level3">
+<h3 class="anchored" data-anchor-id="scatterplots-with-lines-of-best-fit">Scatterplots with lines of best fit</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x=</span>hwy, <span class="at">y =</span> cty)) <span class="sc">+</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-46-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lines of best fit can be misleading <em>(and other methods should be used)</em> when there is not a linear relationship:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y =</span> cty)) <span class="sc">+</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial_files/figure-html/unnamed-chunk-47-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This line is “pretty accurate” but only works for certain parts of the graph. Notice that it is inappropriate for very large and very small engine sizes.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("www\.inqs\.info\/ci_datathon_25");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

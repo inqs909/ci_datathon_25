@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "ci_datathon_25"
+  repo-url: https://github.com/inqs909/ci_datathon_25
+  site-url: www.inqs.info/ci_datathon_25
+  navbar:
+    right:
+      - tutorial.qmd
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    margin-header: |
+      ![](/img/logo.png)
+
+    
+
+
+
