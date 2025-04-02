@@ -12,6 +12,8 @@ format:
       - heightrounded
   html:
     df_print: kable
+    margin-header: |
+      ![](/img/SCCDS.png)
 ---
 
 
@@ -665,11 +667,9 @@ Dot plots are often used in statistics and education for easy interpretation of 
 
 ggplot(mpg) + 
   geom_dotplot(aes(hwy)) +
-  labs(
-    title = "Simple Dot Plot of Highway MPG",
-    x = "Highway MPG",
-    y = "Frequency"
-  )
+  labs(title = "Dot Plot of Highway MPG",
+       x = "Highway MPG",
+       y = "Frequency")
 
 ```
 

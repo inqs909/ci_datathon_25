@@ -3,12 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: "ci_datathon_25"
+  title: "CSUCI Datathon"
   repo-url: https://github.com/inqs909/ci_datathon_25
   site-url: www.inqs.info/ci_datathon_25
   navbar:
     right:
-      - tutorial.qmd
+      - text: "Tutorial"
+        href: tutorial.qmd
 
 
 format:
@@ -18,8 +19,7 @@ format:
       - brand
     css: styles.css
     toc: true
-    margin-header: |
-      ![](/img/logo.png)
+
 
     
 
