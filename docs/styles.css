@@ -1,7 +1,12 @@
 /* css styles */
-.hero {
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-  }
-  
+.hero-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
