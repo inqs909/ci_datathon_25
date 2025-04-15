@@ -697,55 +697,375 @@ ggplot(mpg) +
   geom_boxplot(aes(y = cty, x = drv, fill = class))
 ```
 
-## 3.5 Correlation
+## 3.5 Frequencies Proportions
 
-The **correlation** is a summary statistic between two numeric variables is a number between $-1$ and $1$ that says how much one linearly affects the other (*meaning if you tried to draw a line to "fit" the data*).
+### What Are Frequencies?
+
+**Frequencies** represent the number of times a particular value or category appears in a dataset. They are raw counts and are often used as a starting point for descriptive statistics.
+
+- **Example:**  
+  In a survey of 100 people, if 60 say "Yes" and 40 say "No", the frequencies are:  
+  - "Yes" = 60  
+  - "No" = 40
+
+Frequencies are useful for understanding the **absolute** size or quantity of a group.
+
+### What Are Proportions?
+
+**Proportions** express how large one part is relative to the whole. A proportion is the **frequency of a category divided by the total number of observations**.
+
+- **Formula:**  
+$$
+\text{Proportion} = \frac{\text{Frequency}}{\text{Total Count}}
+$$
+
+- **Example (continued):**  
+  From the previous example:  
+  - Proportion of "Yes" = 60 / 100 = 0.6  
+  - Proportion of "No" = 40 / 100 = 0.4
+
+Proportions can also be converted to **percentages** by multiplying by 100.
+
+### Key Differences
+
+| Concept      | Description                            | Example        |
+|--------------|----------------------------------------|----------------|
+| Frequency    | Raw count of occurrences               | "Yes" = 60     |
+| Proportion   | Relative frequency (part of the whole) | "Yes" = 0.60   |
+| Percentage   | Proportion × 100                       | "Yes" = 60%    |
+
+### Why Use Proportions?
+
+- To compare groups of different sizes
+- To visualize data more clearly (e.g., pie charts, bar graphs)
+- To interpret survey responses, population data, etc.
+
+### In R
+
+You can compute frequencies with `table()` and proportions with `prop.table()`:
 
 ```{r}
-cor(mpg$hwy, mpg$cty)
+
+# Create a frequency table of the 'manufacturer' column in the 'mpg' dataset
+manufacturer_table <- table(mpg$manufacturer)
+manufacturer_table  # Display the count of cars for each manufacturer
 ```
 
-Some rules of thumb can be
+This tells you:
 
-* If correlation is greater than 0.7, the data is strongly correlated.  If the $x$ variable increases, we expect the $y$ variable to increase as well.
-* If correlation is between 0.3 and 0.5.  If the $x$ variable increases, the $y$ variable tends to increase *(but less likely to do so than in the strong case)*
-* If the correlation is between 0 and 0.3, the data is hardly correlated.  It means that as $x$ increases, it's tough to expect $y$ to increase as well.
-
-For negative values, we switch one of "increase" to decrease.  For example, if the correlation is -0.8, we would say "as $x$ increases, we expect $y$ to decrease."
-
-### Challenge 6
-
-1. Go back and review the scatterplot of highway mpg and engine size (``displ``) (use the version with no color or faceting).  What tends to happen to highway mpg for larger engine cars?  Smaller?
-2. Now, compute their correlation.  Is its value consistent with the scatterplot?
-
-### WARNING: Correlation vs Causation
-
-Correlation is a value applied to a dataset that already exists.  It does not necessarily mean that there is a *"causal"* relationship, which would happen if someone tried to intervene with the data.  Here is an example:
-
-*"We expect the daily temperature and number of people on the beach to be positively correlated.  We also expect number of shark attacks and daily temperature and to be positively correlated, since higher temperatures mean more people on the beach, so naturally there are more shark attacks.  However, the relationship is not \textbf{causal}.  If we put more sharks in the water, the number of shark attacks will increase, but it will not increase the temperature."*
-
-### Challenge 7
-
-Think of two scenarios:
-
-1. Two variables that are correlated with one another, and there **is** a causal relationship.
-2. Two variables that are correlated with one another, and there **is not** a causal relationship.  *(This happens in the shark attack example.  Think of a new example.)*
-
-
-### Scatterplots with lines of best fit
+- Dodge appears 37 times in the dataset — likely the most represented manufacturer.
+- Honda appears only 9 times.
+- This gives a sense of which manufacturers are more prevalent in this dataset.
 
 ```{r}
-ggplot(mpg, aes(x=hwy, y = cty)) +
-  geom_jitter() +
-  geom_smooth(method = lm, se = FALSE)
+# Convert the frequency table to proportions (relative frequencies)
+manufacturer_prop <- prop.table(manufacturer_table)
+manufacturer_prop  # Display the proportion of cars for each manufacturer
+
 ```
 
-Lines of best fit can be misleading *(and other methods should be used)* when there is not a linear relationship:
+This tells you:
+
+- Toyota makes up about 14.5% of all the car entries in the dataset.
+- Audi makes up 7.7%.
+
+These are calculated as: `manufacturer count / total number of entries`.
+
+## 3.6 Bar Plots
+
+### What Is a Bar Plot?
+
+A **bar plot** is a type of chart that displays **categorical data** with rectangular bars. The **length or height** of each bar represents the **count** or **value** for that category.
+
+### Key Features
+- **X-axis**: Categories (e.g., car types, countries, months)
+- **Y-axis**: Frequency or value associated with each category
+- Note: Both the **X-axis** and **Y-axis** may be reversed. 
+- Bars can be **vertical** or **horizontal**
+- Can be **grouped** or **stacked** to compare sub-categories
+
+### When to Use:
+- To compare counts across categories
+- To visualize distributions of a single categorical variable
+- To show changes across groups or time (with discrete intervals)
+
+Bar plots are easy to read and useful for summarizing and comparing categorical data.
+
+
+### Bar Plots in R
+
+Both of the code chunks below provide 2 different ways to create a bar chart.
 
 ```{r}
-ggplot(mpg, aes(x=displ, y = cty)) +
-  geom_jitter() +
-  geom_smooth(method = lm, se = FALSE)
+# Create a bar plot showing the number of vehicles by manufacturer
+ggplot(mpg, aes(x = manufacturer)) +  # Set 'manufacturer' on the x-axis (categorical variable)
+  geom_bar()                          # Automatically counts observations for each manufacturer and plots bars
 ```
 
-This line is "pretty accurate" but only works for certain parts of the graph.  Notice that it is inappropriate for very large and very small engine sizes.
+```{r}
+# Create a horizontal bar chart showing the number of vehicles by manufacturer
+ggplot(mpg, aes(y = manufacturer)) +  # Map 'manufacturer' to the y-axis (to create horizontal bars)
+  geom_bar()                          # Automatically counts observations for each manufacturer and draws bars
+```
+
+### Interpretation of the Bar Plot: Vehicle Count by Manufacturer
+
+This horizontal bar chart displays the **number of vehicle models** per manufacturer in the `mpg` dataset. Each bar represents a car manufacturer, and the **length of the bar reflects how many entries (vehicle models)** that brand has in the dataset.
+
+
+### Key Observations
+
+- **Dodge** has the **most vehicles** in the dataset.
+- **Toyota** **Volkswagen** and **Ford** also have a high number of entries.
+- Other well-represented manufacturers include:
+  - **Chevrolet**
+  - **Audi**
+- Manufacturers with the **fewest vehicles** include:
+  - **Lincoln**
+  - **Mercury**
+  - **Pontiac**
+  - **Land Rover**
+
+
+### Interpretation
+
+- This plot provides insight into **which brands are most prevalent** in the dataset.
+- Manufacturers like **Dodge, Toyota, Ford, and Volkswagen** have a larger presence, indicating either more vehicle lines or more representation in the data source.
+- **Smaller bars** indicate fewer models or less coverage in the dataset.
+
+
+## 3.7 Contingency Tables
+
+### What Is a Contingency Table?
+
+A **contingency table** (also called a **cross-tabulation** or **crosstab**) is a type of table that displays the frequency distribution of variables. It is commonly used to **summarize the relationship between two or more categorical variables**.
+
+Each cell in the table shows the number of observations that fall into the corresponding category combinations.
+
+
+### Why Use Contingency Tables?
+
+Contingency tables help you:
+
+- Understand the interaction between two categorical variables
+- Compute proportions across rows, columns, or the entire table
+- Perform statistical tests like the Chi-square test for independence
+  - See if the variables are related to each other
+
+
+### Example in R: Using the `mpg` Dataset
+
+We'll create a contingency table of **drive type (`drv`)** by **vehicle class (`class`)** using the `table()`.
+
+```{r}
+# Create a contingency table of drive type (drv) by vehicle class
+# This counts how many observations fall into each combination of drv and class
+ct <- table(mpg$drv, mpg$class)
+
+# Print the contingency table
+ct
+```
+
+
+Row and Column Interpretation
+- drv: Drive type (Row)
+  - f = front-wheel drive
+  - r = rear-wheel drive
+  - 4 = 4-wheel or all-wheel drive
+- class: Vehicle class (like compact, SUV, etc.) (Column)
+
+#### Drive Type: `4` (4-Wheel Drive)
+
+- **Most common in**:
+  - **SUVs** (51)
+  - **Pickups** (33)
+- **Also present in**:
+  - Compact (12)
+  - Midsize (3)
+  - Subcompact (4)
+- **Absent in**:
+  - 2seater and Minivan
+
+> 4WD is most typical for SUVs and trucks
+
+
+#### Drive Type: `f` (Front-Wheel Drive)
+
+- **Most common in**:
+  - **Midsize** (38)
+  - **Compact** (35)
+  - **Subcompact** (22)
+- **Also found in**:
+  - Minivan (11)
+- **Absent in**:
+  - SUV, Pickup, 2seater
+
+> FWD is common in passenger vehicles, especially sedans, compacts, and minivans.
+
+
+#### Drive Type: `r` (Rear-Wheel Drive)
+
+- **Most common in**:
+  - **SUVs** (11)
+  - **Subcompact** (9)
+  - **2seater** (5)
+- **Absent in**:
+  - Compact, Midsize, Minivan, Pickup
+
+> RWD is rare overall but more typical in performance cars (e.g., 2seaters) and certain SUVs.
+
+
+#### Summary of Key Patterns
+
+| Class       | Most Common Drive Type |
+|-------------|------------------------|
+| SUV         | 4WD and RWD            |
+| Pickup      | 4WD only               |
+| Minivan     | FWD only               |
+| Compact     | Mostly FWD             |
+| Midsize     | Mostly FWD             |
+| Subcompact  | Mix of all types       |
+| 2seater     | Only RWD               |
+
+- FWD dominates among general passenger cars (compact, midsize, subcompact).
+- RWD is least common but associated with performance or specialty vehicles.
+
+### What Are Table Proportions?
+
+**Table proportions** are the relative frequencies calculated from a contingency table. Instead of showing raw counts, proportions express how much each cell contributes to the total — either:
+
+- As a **proportion of the whole table**
+- Within each **row** (row-wise)
+- Within each **column** (column-wise)
+
+These proportions help you understand distributions and relationships in a more comparable way, especially when counts vary across groups.
+
+### Computing Proportions in R
+
+Using the contingency table we already have:
+
+```{r}
+ct <- table(mpg$drv, mpg$class)
+```
+
+We can abtain the proportions for the entire table with the following code and the `prop.table()` function:
+
+
+```{r}
+prop.table(ct)
+```
+
+- `drv = 4` (4-Wheel Drive)
+  - 21.8% of 4WD vehicles are also SUVs
+  - 14.1% are also pickups
+  - Smaller proportions in compact (5.1%) and subcompact (1.7%) classes
+  - 0% in minivan and 2seater
+
+- `drv = f` (Front-Wheel Drive)
+  - 16.2% of FWD vehicles are also midsize cars
+  - 15.0% are also compact
+  - 9.4% are also subcompacts
+  - 4.7% are also minivans
+  - 0% in SUV, pickup, and 2seater
+
+- `drv = r` (Rear-Wheel Drive)
+  - 4.7% are also SUVs
+  - 3.8% are also subcompacts
+  - 2.1% are also 2seaters
+  - 0% in all other categories
+
+
+## 3.8 Stacked Bar Plot 
+
+A **stacked bar plot** (or stacked bar chart) is a type of bar graph used to **visualize the composition of categories within groups**.
+
+Instead of placing bars side by side (as in a grouped bar plot), a stacked bar plot **stacks sub-categories on top of one another**, all within a single bar.
+
+### Why Use a Stacked Bar Plot?
+
+A stacked bar plot helps you:
+
+- Compare **totals** across groups (e.g., total sales per region)
+- Understand **sub-category composition** within each group (e.g., product types within regions)
+- Spot **proportional trends** visually (e.g., increasing share of a category over time)
+
+### Stacked Bar Plot in R
+
+```{r}
+# Create a stacked bar chart using the mpg dataset
+ggplot(mpg, aes(y = drv, fill = class)) +  # Set 'drv' on y-axis and fill bars by 'class'
+  geom_bar()                           # Plot counts as bars (defaults to count per group)
+```
+
+```{r}
+# Create a stacked bar chart using the mpg dataset
+ggplot(mpg, aes(drv, fill = class)) +  # Set 'drv' on x-axis and fill bars by 'class'
+  geom_bar()                           # Plot counts as bars (defaults to count per group)
+```
+
+
+
+### Interpretation of Stacked Bar Plot: `drv` by `class` (Most Recent Plot)
+
+This stacked bar chart shows the **count of vehicles** for each **drive type (`drv`)** in the `mpg` dataset, broken down by **vehicle class (`class`)**.
+
+- **x-axis**: Drive type (`drv`)
+  - `4` = 4-wheel drive
+  - `f` = front-wheel drive
+  - `r` = rear-wheel drive
+
+- **y-axis**: Count of vehicles
+
+- **Fill color**: Vehicle class (e.g., SUV, compact, pickup)
+
+
+####  Drive Type: `4` (4-Wheel Drive)
+
+- Dominated by:
+  - **SUVs** 
+  - **Pickup trucks** 
+- Minor presence of:
+  - **Subcompacts**
+  - **Midsize**
+  - **Compacts**
+- No **2seaters** or **minivans**
+
+> 4WD is commonly used in SUVs and trucks for off-road or utility purposes.
+
+
+#### Drive Type: `f` (Front-Wheel Drive)
+
+- Dominated by:
+  - **Midsize**
+  - **Compact** 
+  - **Subcompact** 
+  - **Minivans** 
+- No presence of:
+  - **Pickups**
+  - **SUVs**
+  - **2seaters**
+
+> FWD is typical for passenger vehicles designed for city or family driving.
+
+
+### Drive Type: `r` (Rear-Wheel Drive)
+
+- Smallest overall count
+- Includes:
+  - **2seaters** 
+  - **Subcompacts**
+  - **SUVs**
+- No **compact**, **midsize**, **pickup**, or **minivan**
+
+> RWD is less common, usually found in performance cars and some SUVs.
+
+
+### Key Takeaway
+
+This stacked bar plot effectively shows how **vehicle classes are distributed across drive types**. It helps identify which types of vehicles are associated with each drivetrain layout.
+
+
+
+
+
+
