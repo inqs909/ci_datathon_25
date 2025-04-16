@@ -1384,8 +1384,8 @@ volkswagen
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a horizontal bar chart showing the number of vehicles by manufacturer</span></span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">y =</span> manufacturer)) <span class="sc">+</span>  <span class="co"># Map 'manufacturer' to the y-axis (to create horizontal bars)</span></span>
-<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                          <span class="co"># Automatically counts observations for each manufacturer and draws bars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>  <span class="co"># Sets 'mpg'</span></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> manufacturer))                          <span class="co"># Automatically counts observations for each manufacturer and draws bars and sets 'manufacturer' to the y-axis (to create horizontal bars)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1649,8 +1649,8 @@ volkswagen
 <h3 class="anchored" data-anchor-id="stacked-bar-plot-in-r">Stacked Bar Plot in R</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a stacked bar chart using the mpg dataset</span></span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">y =</span> drv, <span class="at">fill =</span> class)) <span class="sc">+</span>  <span class="co"># Set 'drv' on y-axis and fill bars by 'class'</span></span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                           <span class="co"># Plot counts as bars (defaults to count per group)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>  <span class="co"># Set 'mpg' as the data set on x-axis and fill bars by 'class'</span></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> drv, <span class="at">fill =</span> class))    <span class="co"># Plot counts as bars (defaults to count per group) and sets 'drv' on the y-axis and fill bars by 'class'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1661,8 +1661,8 @@ volkswagen
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a stacked bar chart using the mpg dataset</span></span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(drv, <span class="at">fill =</span> class)) <span class="sc">+</span>  <span class="co"># Set 'drv' on x-axis and fill bars by 'class'</span></span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                           <span class="co"># Plot counts as bars (defaults to count per group)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span>  <span class="co"># Set 'mpg' as the data set on x-axis and fill bars by 'class'</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(drv, <span class="at">fill =</span> class))    <span class="co"># Plot counts as bars (defaults to count per group) and sets 'drv' on the x-axis and fill bars by 'class'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

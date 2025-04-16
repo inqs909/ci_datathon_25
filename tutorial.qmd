@@ -804,8 +804,8 @@ ggplot(mpg, aes(x = manufacturer)) +  # Set 'manufacturer' on the x-axis (catego
 
 ```{r}
 # Create a horizontal bar chart showing the number of vehicles by manufacturer
-ggplot(mpg, aes(y = manufacturer)) +  # Map 'manufacturer' to the y-axis (to create horizontal bars)
-  geom_bar()                          # Automatically counts observations for each manufacturer and draws bars
+ggplot(mpg) +  # Sets 'mpg'
+  geom_bar(aes(y = manufacturer))                          # Automatically counts observations for each manufacturer and draws bars and sets 'manufacturer' to the y-axis (to create horizontal bars)
 ```
 
 ### Interpretation of the Bar Plot: Vehicle Count by Manufacturer
@@ -993,14 +993,14 @@ A stacked bar plot helps you:
 
 ```{r}
 # Create a stacked bar chart using the mpg dataset
-ggplot(mpg, aes(y = drv, fill = class)) +  # Set 'drv' on y-axis and fill bars by 'class'
-  geom_bar()                           # Plot counts as bars (defaults to count per group)
+ggplot(mpg) +  # Set 'mpg' as the data set on x-axis and fill bars by 'class'
+  geom_bar(aes(y = drv, fill = class))    # Plot counts as bars (defaults to count per group) and sets 'drv' on the y-axis and fill bars by 'class'
 ```
 
 ```{r}
 # Create a stacked bar chart using the mpg dataset
-ggplot(mpg, aes(drv, fill = class)) +  # Set 'drv' on x-axis and fill bars by 'class'
-  geom_bar()                           # Plot counts as bars (defaults to count per group)
+ggplot(mpg) +  # Set 'mpg' as the data set on x-axis and fill bars by 'class'
+  geom_bar(aes(drv, fill = class))    # Plot counts as bars (defaults to count per group) and sets 'drv' on the x-axis and fill bars by 'class'
 ```
 
 

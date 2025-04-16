@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>www.inqs.info/ci_datathon_25/tutorial.html</loc>
-    <lastmod>2025-04-15T18:19:32.752Z</lastmod>
+    <loc>www.inqs.info/ci_datathon_25/codebook_19052696.html</loc>
+    <lastmod>2025-04-16T03:54:48.729Z</lastmod>
   </url>
   <url>
     <loc>www.inqs.info/ci_datathon_25/index.html</loc>
     <lastmod>2025-04-02T04:09:11.266Z</lastmod>
+  </url>
+  <url>
+    <loc>www.inqs.info/ci_datathon_25/tutorial.html</loc>
+    <lastmod>2025-04-16T16:58:59.149Z</lastmod>
   </url>
 </urlset>
