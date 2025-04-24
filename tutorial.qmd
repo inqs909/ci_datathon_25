@@ -22,10 +22,17 @@ format:
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(out.width="70%", out.height="60%", fig.align="center", warning=FALSE, message=FALSE)
-
+library(tidyverse)
 ```
 
+# 0. Installing and Loading R Packages
 
+
+```{r}
+#| eval: false
+install.packages("tidyverse")
+library(tidyverse)
+```
 
 # 1. Basics
 
