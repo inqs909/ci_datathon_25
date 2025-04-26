@@ -12,6 +12,10 @@ website:
     right:
       - text: "Tutorial"
         href: tutorial.qmd
+      - text: "Competition"
+        href: competition.qmd
+      - text: "Databook"
+        href: codebook.qmd
 
 
 format:

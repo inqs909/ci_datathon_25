@@ -1,5 +1,5 @@
 ---
-title: 'Datathon: Competition'
+title: 'Competition'
 author: "CSUCI Datathon  --  Southern California Consortium for Data Science"
 date: "Saturday, April 26, 2025"
 format:

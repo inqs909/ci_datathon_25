@@ -4,6 +4,18 @@
 
 The CSUCI Datathon is an incredible opportunity for High School and Community College students to dive into the world of data science alongside professionals! Participants will explore cutting-edge data science topics in engaging sessions, gain insider knowledge on what it’s really like to be a data scientist from our expert panel, and then put their skills to the test in a thrilling datathon challenge using a surprise dataset. With a full day of learning, competition, exciting prizes, delicious food, and more, this event promises to be both educational and unforgettable!
 
+::: {.callout-warning icon="false"}
+### Competition Data
+
+[Data Package](https://csuci-my.sharepoint.com/:u:/g/personal/isaac_quintanillasalinas_csuci_edu/ETOcmZfhgoRIlBCQX0zcBDgBbggctMgHZ3jEekb51oV2og?e=7k9jQr)
+
+Use CSV File: data_for_csuci_datathon_2014_2016.csv
+
+Password: dolphins_2025
+
+:::
+
+
 
 Guest Logins:
 
