@@ -1,5 +1,6 @@
 ---
 toc: false
+format: html
 ---
 
 <div class="hero-container">
@@ -25,6 +26,32 @@ Use CSV File: data_for_csuci_datathon_2014_2016.csv
 Password: dolphins_2025
 
 :::
+
+### Partner Campuses
+
+
+<div style="margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+
+<div><img src="img/CPP.jpeg" width="100%" /></div>
+<div><img src="img/CSUCI.png" width="100%" /></div>
+<div><img src="img/LBSU.png" width="100%" /></div>
+<div><img src="img/LACC.jpg" width="100%" /></div>
+<div><img src="img/LBCC.png" width="100%" /></div>
+<div><img src="img/MESA.jpeg" width="100%" /></div>
+<div><img src="img/sdsu.png" width="100%" /></div>
+<div><img src="img/ucsb.gif" width="100%" /></div>
+
+</div>
+
+
+### Thank You to Our Supporters
+
+- California Education Learning Lab
+- CSUCI Office of the Provost
+- CSUCI Department of Mathematics and Data Science
+
+
+
 
 
 
