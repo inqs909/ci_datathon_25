@@ -18,12 +18,12 @@ The CSUCI Datathon is an incredible opportunity for High School and Community Co
 ::: {.callout-tip icon="false"}
 ### Competition Data
 
-[Data Package](https://csuci-my.sharepoint.com/:u:/g/personal/isaac_quintanillasalinas_csuci_edu/ETOcmZfhgoRIlBCQX0zcBDgBbggctMgHZ3jEekb51oV2og?e=FS57h4)
+[Data Package](https://csuci-my.sharepoint.com/:u:/g/personal/isaac_quintanillasalinas_csuci_edu/ETOcmZfhgoRIlBCQX0zcBDgB8MuHbrf8CCzQPqQ6Lpst9w?e=PcnP07)
 
 
-Use CSV File: data_for_csuci_datathon_2014_2016.csv
+Data CSV File: data_for_csuci_datathon_2014_2016.csv
 
-Password: dolphins_2025
+
 
 :::
 
